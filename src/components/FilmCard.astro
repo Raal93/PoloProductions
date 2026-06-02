@@ -1,0 +1,85 @@
+---
+import type { FilmProject } from '../data/mockFilms';
+
+type Props = {
+  film: FilmProject;
+};
+
+const { film } = Astro.props;
+---
+
+<a href={`/portfolio/${film.slug}`} class="film-card">
+  <div class="film-card__image-wrap">
+    <div class="film-card__image-placeholder"></div>
+    <div class="film-card__overlay"></div>
+  </div>
+  <div class="film-card__content">
+    <p class="film-card__location">{film.location}</p>
+    <h3 class="film-card__title">{film.title}</h3>
+    <p class="film-card__excerpt">{film.excerpt}</p>
+  </div>
+</a>
+
+<style>
+.film-card {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  transition: transform var(--transition-base);
+}
+
+.film-card:hover {
+  transform: translateY(-4px);
+  color: inherit;
+}
+
+.film-card__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.film-card__image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2218 50%, #1a1210 100%);
+  transition: transform var(--transition-base);
+}
+
+.film-card:hover .film-card__image-placeholder {
+  transform: scale(1.03);
+}
+
+.film-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 13, 13, 0.6) 0%, transparent 60%);
+}
+
+.film-card__content {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.film-card__location {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.4rem;
+}
+
+.film-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.film-card__excerpt {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+</style>

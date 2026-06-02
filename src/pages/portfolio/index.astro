@@ -1,0 +1,35 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import FilmCard from '../../components/FilmCard.astro';
+import { mockFilms } from '../../data/mockFilms';
+---
+
+<MainLayout title="Portfolio — Polo Productions">
+  <section class="portfolio-page">
+    <div class="container">
+      <SectionHeader
+        label="Portfolio"
+        title="Wszystkie filmy"
+        subtitle="Opowieści miłosne uwiecznione na zawsze."
+      />
+      <div class="portfolio-page__grid">
+        {mockFilms.map((film) => (
+          <FilmCard film={film} />
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+.portfolio-page {
+  padding-top: calc(var(--space-section) + 5rem);
+}
+
+.portfolio-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+</style>

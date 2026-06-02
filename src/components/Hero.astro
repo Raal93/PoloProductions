@@ -1,0 +1,165 @@
+---
+---
+
+<section class="hero">
+  <video
+    class="hero__video"
+    autoplay
+    muted
+    loop
+    playsinline
+    disablepictureinpicture
+    aria-hidden="true"
+  >
+    <source src="/hero.mp4" type="video/mp4" />
+  </video>
+
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <span class="hero__label">Kinowe Filmy Ślubne · Lublin</span>
+    <h1 class="hero__title">Twoja historia<br />zasługuje na film</h1>
+    <p class="hero__subtitle">
+      Uwieczniam najpiękniejsze momenty z życia<br />w naturalnym, filmowym stylu.
+    </p>
+    <div class="hero__actions">
+      <a href="/portfolio" class="btn btn--primary">Zobacz filmy</a>
+      <a href="/kontakt" class="btn btn--ghost">Napisz do mnie</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll-hint" aria-hidden="true">
+    <div class="hero__scroll-line"></div>
+    <span>Przewiń</span>
+  </div>
+</section>
+
+<style>
+.hero {
+  position: relative;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ——— Video background ——— */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ——— Overlay ——— */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0.2) 0%,
+    rgba(13, 13, 13, 0.4) 50%,
+    rgba(13, 13, 13, 0.7) 100%
+  );
+  transition: background 400ms ease;
+}
+
+/* Hover: delikatnie ciemniejsze tło → czytelniejszy tekst */
+.hero:hover .hero__overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0.32) 0%,
+    rgba(13, 13, 13, 0.54) 50%,
+    rgba(13, 13, 13, 0.82) 100%
+  );
+}
+
+/* ——— Content ——— */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-inline: 1.5rem;
+  max-width: 760px;
+}
+
+.hero__label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.75rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  /* Subtelny cień nadający głębię — niewidoczny, ale poprawia czytelność */
+  text-shadow:
+    0 2px 24px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin-bottom: 2.75rem;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ——— Scroll hint ——— */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-muted);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--color-muted));
+  animation: scroll-line 1.8s ease-in-out infinite;
+}
+
+.hero__scroll-hint span {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@keyframes scroll-line {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+}
+
+/* ——— Reduced motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-line {
+    animation: none;
+  }
+}
+</style>

@@ -1,0 +1,60 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__brand">Polo Productions</p>
+    <p class="footer__tagline">Cinematic wedding films · Polska</p>
+    <a href="mailto:kontakt@poloproductions.pl" class="footer__email">
+      kontakt@poloproductions.pl
+    </a>
+    <p class="footer__copy">© {year} Polo Productions. Wszelkie prawa zastrzeżone.</p>
+  </div>
+</footer>
+
+<style>
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-block: 3rem;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.footer__brand {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-text);
+  letter-spacing: 0.1em;
+}
+
+.footer__tagline {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+}
+
+.footer__email {
+  font-size: 0.875rem;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  transition: opacity var(--transition-base);
+}
+
+.footer__email:hover {
+  opacity: 0.75;
+  color: var(--color-accent);
+}
+
+.footer__copy {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin-top: 1rem;
+}
+</style>

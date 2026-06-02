@@ -1,0 +1,191 @@
+---
+const navLinks = [
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Oferta', href: '/oferta' },
+  { label: 'O mnie', href: '/o-mnie' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+---
+
+<header class="header">
+  <div class="container header__inner">
+
+    <a href="/" class="header__logo" aria-label="Polo Productions – strona główna">
+      <img src="/logosvg.svg" alt="Polo Productions" class="header__logo-img" />
+    </a>
+
+    <nav class="header__nav" id="main-nav" aria-label="Główna nawigacja">
+      {navLinks.map(link => (
+        <a href={link.href} class="header__nav-link">{link.label}</a>
+      ))}
+    </nav>
+
+    <button
+      class="header__hamburger"
+      id="hamburger"
+      aria-label="Otwórz menu"
+      aria-expanded="false"
+      aria-controls="main-nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</header>
+
+<style>
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  padding-block: 1.25rem;
+  transition: background-color 250ms ease, backdrop-filter 250ms ease;
+}
+
+.header.scrolled {
+  background-color: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(10px);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ——— Logo ——— */
+.header__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header__logo-img {
+  height: 52px;
+  width: auto;
+  display: block;
+}
+
+/* ——— Desktop nav ——— */
+.header__nav {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.header__nav-link {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition: color var(--transition-base);
+}
+
+.header__nav-link:hover {
+  color: var(--color-text);
+}
+
+/* ——— Hamburger button (hidden on desktop) ——— */
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 400;
+}
+
+.header__hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background-color: var(--color-text);
+  transition: transform 280ms ease, opacity 200ms ease;
+  transform-origin: center;
+}
+
+/* X shape when open */
+.header__hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.header__hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.header__hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ——— Mobile styles ——— */
+@media (max-width: 768px) {
+  .header__hamburger {
+    display: flex;
+  }
+
+  .header__nav {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    background-color: rgba(13, 13, 13, 0.97);
+    backdrop-filter: blur(12px);
+
+    /* Hidden by default */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease;
+  }
+
+  .header__nav.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .header__nav-link {
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+  }
+
+  .header__nav-link:hover {
+    color: var(--color-accent);
+  }
+}
+</style>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('main-nav');
+
+hamburger?.addEventListener('click', () => {
+  const isOpen = hamburger.classList.toggle('open');
+  nav?.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Zamknij menu po kliknięciu linku
+nav?.querySelectorAll('.header__nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger?.classList.remove('open');
+    nav.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+
+// Scroll: dodaj klasę .scrolled
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+  header?.classList.toggle('scrolled', window.scrollY > 50);
+});
+</script>
