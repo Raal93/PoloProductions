@@ -1,0 +1,108 @@
+---
+---
+
+<section class="promise">
+  <div class="promise__glow" aria-hidden="true"></div>
+  <div class="container promise__inner">
+    <blockquote class="promise__quote">
+      <p>
+        Nie tworzę przypadkowej relacji z dnia ślubu.<br />
+        Tworzę filmową opowieść o atmosferze, ludziach i detalach,<br />
+        które za kilka lat nadal będą miały znaczenie.
+      </p>
+    </blockquote>
+    <ul class="promise__pillars" role="list">
+      <li class="promise__pillar">
+        <span class="promise__dash" aria-hidden="true"></span>
+        Naturalne emocje
+      </li>
+      <li class="promise__pillar">
+        <span class="promise__dash" aria-hidden="true"></span>
+        Filmowy montaż
+      </li>
+      <li class="promise__pillar">
+        <span class="promise__dash" aria-hidden="true"></span>
+        Dyskretna praca w dniu ślubu
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+.promise {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.promise__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(198, 164, 106, 0.06) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.promise__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.promise__quote {
+  max-width: 780px;
+  margin: 0;
+}
+
+.promise__quote p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3vw, 1.9rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.promise__pillars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 600px) {
+  .promise__pillars {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+.promise__pillar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.promise__dash {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background-color: var(--color-accent);
+  flex-shrink: 0;
+}
+</style>

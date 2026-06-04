@@ -1,0 +1,130 @@
+---
+---
+
+<section class="social-proof">
+  <div class="container">
+    <div class="social-proof__quote-wrap">
+      <span class="social-proof__mark" aria-hidden="true">"</span>
+      <blockquote class="social-proof__quote">
+        Nie czuliśmy kamery, a film wygląda jak coś znacznie większego niż zwykły
+        reportaż. Jest naturalny, elegancki i bardzo nasz.
+      </blockquote>
+      <footer class="social-proof__author">
+        <span class="social-proof__name">Anna & Michał</span>
+        <span class="social-proof__location">Kraków</span>
+      </footer>
+    </div>
+
+    <!-- TODO: Zweryfikuj te liczby przed publikacją — są placeholderami -->
+    <ul class="social-proof__stats" role="list">
+      <li class="social-proof__stat">
+        <span class="social-proof__stat-num">50+</span>
+        <span class="social-proof__stat-label">zrealizowanych filmów</span>
+      </li>
+      <li class="social-proof__stat">
+        <span class="social-proof__stat-num">10+</span>
+        <span class="social-proof__stat-label">miast w Polsce</span>
+      </li>
+      <li class="social-proof__stat">
+        <span class="social-proof__stat-num">5 lat</span>
+        <span class="social-proof__stat-label">doświadczenia</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+.social-proof {
+  text-align: center;
+}
+
+.social-proof__quote-wrap {
+  position: relative;
+  max-width: 680px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+}
+
+.social-proof__mark {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 7rem;
+  line-height: 0.55;
+  color: var(--color-accent);
+  opacity: 0.18;
+  margin-bottom: 1.25rem;
+  user-select: none;
+}
+
+.social-proof__quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3vw, 1.65rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+.social-proof__author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.social-proof__name {
+  font-size: 0.875rem;
+  color: var(--color-text);
+  letter-spacing: 0.06em;
+}
+
+.social-proof__location {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.social-proof__stats {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 3rem;
+}
+
+@media (min-width: 600px) {
+  .social-proof__stats {
+    flex-direction: row;
+    justify-content: center;
+    gap: 6rem;
+  }
+}
+
+.social-proof__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.social-proof__stat-num {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.social-proof__stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+</style>

@@ -1,0 +1,159 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Zapytanie',
+    description: 'Wysyłacie datę, miejsce i kilka zdań o planowanym dniu.',
+  },
+  {
+    number: '02',
+    title: 'Rozmowa',
+    description: 'Ustalamy klimat filmu, zakres realizacji i najważniejsze momenty.',
+  },
+  {
+    number: '03',
+    title: 'Dzień ślubu',
+    description: 'Pracuję dyskretnie, bez reżyserowania wszystkiego na siłę.',
+  },
+  {
+    number: '04',
+    title: 'Gotowy film',
+    description: 'Otrzymujecie film, teaser i materiały dodatkowe w ustalonym terminie.',
+  },
+];
+---
+
+<section class="process-sec" id="proces">
+  <div class="container">
+    <div class="process-sec__header">
+      <span class="process-sec__label">Jak to działa</span>
+      <h2 class="process-sec__title">Prosto i bez stresu</h2>
+    </div>
+    <div class="process-sec__steps">
+      {steps.map((step) => (
+        <div class="process-step">
+          <div class="process-step__top">
+            <span class="process-step__num">{step.number}</span>
+            <div class="process-step__line" aria-hidden="true"></div>
+          </div>
+          <h3 class="process-step__title">{step.title}</h3>
+          <p class="process-step__desc">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.process-sec {
+  background-color: var(--color-surface);
+}
+
+.process-sec__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.process-sec__label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.process-sec__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.process-sec__steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 769px) {
+  .process-sec__steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.process-step {
+  padding-block: 2rem;
+  padding-right: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  transition: border-top-color 200ms ease;
+}
+
+.process-step:hover {
+  border-top-color: rgba(198, 164, 106, 0.35);
+}
+
+@media (min-width: 769px) {
+  .process-step {
+    padding-block: 2.5rem;
+    padding-right: 2rem;
+  }
+
+  .process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    right: 0;
+    width: 1px;
+    height: calc(100% - 5rem);
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.process-step__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.process-step__num {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--color-accent);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.process-step__line {
+  flex: 1;
+  height: 1px;
+  background: rgba(198, 164, 106, 0.18);
+  transition: background 200ms ease;
+}
+
+.process-step:hover .process-step__line {
+  background: rgba(198, 164, 106, 0.35);
+}
+
+@media (min-width: 769px) {
+  .process-step__line {
+    display: none;
+  }
+}
+
+.process-step__title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+.process-step__desc {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.75;
+}
+</style>

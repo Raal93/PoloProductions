@@ -1,15 +1,29 @@
 ---
 const year = new Date().getFullYear();
+
+const navLinks = [
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Proces', href: '/#proces' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
 ---
 
 <footer class="footer">
   <div class="container footer__inner">
-    <p class="footer__brand">Polo Productions</p>
-    <p class="footer__tagline">Cinematic wedding films · Polska</p>
-    <a href="mailto:kontakt@poloproductions.pl" class="footer__email">
-      kontakt@poloproductions.pl
-    </a>
-    <p class="footer__copy">© {year} Polo Productions. Wszelkie prawa zastrzeżone.</p>
+    <div class="footer__top">
+      <a href="/" class="footer__logo" aria-label="Polo Productions – strona główna">
+        <img src="/logosvg.svg" alt="Polo Productions" class="footer__logo-img" />
+      </a>
+      <nav class="footer__nav" aria-label="Nawigacja stopki">
+        {navLinks.map(link => (
+          <a href={link.href} class="footer__nav-link">{link.label}</a>
+        ))}
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__tagline">Kinowe filmy ślubne · Polska</p>
+      <p class="footer__copy">© {year} Polo Productions. Wszelkie prawa zastrzeżone.</p>
+    </div>
   </div>
 </footer>
 
@@ -22,39 +36,84 @@ const year = new Date().getFullYear();
 .footer__inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  text-align: center;
+  gap: 2.5rem;
 }
 
-.footer__brand {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--color-text);
-  letter-spacing: 0.1em;
+.footer__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+@media (min-width: 769px) {
+  .footer__top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer__logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  opacity: 0.75;
+  transition: opacity 180ms ease;
+}
+
+.footer__logo:hover .footer__logo-img {
+  opacity: 1;
+}
+
+.footer__nav {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer__nav-link {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.footer__nav-link:hover {
+  color: var(--color-accent);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+@media (min-width: 769px) {
+  .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .footer__tagline {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: var(--color-muted);
-  letter-spacing: 0.05em;
-}
-
-.footer__email {
-  font-size: 0.875rem;
-  color: var(--color-accent);
-  letter-spacing: 0.05em;
-  transition: opacity var(--transition-base);
-}
-
-.footer__email:hover {
-  opacity: 0.75;
-  color: var(--color-accent);
+  letter-spacing: 0.06em;
 }
 
 .footer__copy {
-  font-size: 0.75rem;
-  color: var(--color-muted);
-  margin-top: 1rem;
+  font-size: 0.7rem;
+  color: rgba(168, 160, 150, 0.45);
 }
 </style>

@@ -1,0 +1,357 @@
+/* ============================================================
+   FeaturedFilms React component styles
+   Global scope required — React output doesn't receive Astro's
+   scoped data-attributes.
+   ============================================================ */
+
+/* ——— Section ——— */
+.yt-films {
+  background-color: var(--color-bg);
+}
+
+.yt-films__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.yt-films__label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.yt-films__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.yt-films__subtitle {
+  font-size: 1rem;
+  color: var(--color-muted);
+  max-width: 52ch;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+/* ——— Grid ——— */
+.yt-films__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 769px) {
+  .yt-films__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ——— Card (article, not button) ——— */
+.yt-card {
+  display: block;
+  width: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  text-align: left;
+  color: inherit;
+  cursor: default;
+  transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.yt-card:hover {
+  border-color: rgba(198, 164, 106, 0.28);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ——— Thumbnail ——— */
+.yt-card__thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: linear-gradient(135deg, #181818 0%, #2a2218 55%, #1a1210 100%);
+  cursor: pointer;
+  /* Stacking context so z-index on children works as expected */
+  isolation: isolate;
+}
+
+/* Poster image */
+.yt-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 260ms ease;
+  pointer-events: none;
+}
+
+.yt-card__img--hidden {
+  opacity: 0;
+}
+
+/* ——— Local preview video ——— */
+.yt-card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 260ms ease;
+  pointer-events: none;
+}
+
+.yt-card__video--visible {
+  opacity: 1;
+}
+
+/* ——— Gradient overlay (always present) ——— */
+.yt-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 25%,
+    rgba(13, 13, 13, 0.65) 100%
+  );
+  pointer-events: none;
+  transition: background 220ms ease;
+}
+
+.yt-card:hover .yt-card__overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0.08) 0%,
+    rgba(13, 13, 13, 0.72) 100%
+  );
+}
+
+/* ——— Touch hint ——— */
+.yt-card__hint {
+  position: absolute;
+  bottom: 4.5rem; /* sits above the play button */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  transition: opacity 200ms ease;
+
+  /* Hidden on desktop (hover-capable devices) */
+  display: none;
+}
+
+/* Show only on touch / non-hover devices */
+@media (hover: none) {
+  .yt-card__hint {
+    display: block;
+  }
+}
+
+/* ——— Play button (real <button>) ——— */
+.yt-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  background: rgba(13, 13, 13, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px; /* optical centering of the play triangle */
+  color: #fff;
+  cursor: pointer;
+  z-index: 2; /* above video, overlay, and hint */
+  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease, opacity 220ms ease;
+}
+
+.yt-card:hover .yt-card__play {
+  transform: translate(-50%, -50%) scale(1.14);
+  background: rgba(198, 164, 106, 0.22);
+  border-color: var(--color-accent);
+  backdrop-filter: blur(4px);
+}
+
+/* During video preview — fade play button way back */
+.yt-card__thumb--previewing .yt-card__play {
+  opacity: 0.18;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Restore on direct hover over the button itself */
+.yt-card__thumb--previewing .yt-card__play:hover,
+.yt-card__thumb--previewing .yt-card__play:focus-visible {
+  opacity: 1;
+  border-color: var(--color-accent);
+  background: rgba(198, 164, 106, 0.22);
+}
+
+.yt-card__play:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* Larger touch target on mobile */
+@media (hover: none) {
+  .yt-card__play {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+/* ——— Card body ——— */
+.yt-card__body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.yt-card__meta {
+  display: block;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.45rem;
+}
+
+.yt-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin: 0 0 0.45rem;
+  line-height: 1.15;
+}
+
+.yt-card__desc {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ============================================================
+   Modal
+   ============================================================ */
+.yt-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: yt-modal-in 180ms ease;
+}
+
+@keyframes yt-modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.yt-modal__box {
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.yt-modal__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.yt-modal__film-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--color-text);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.yt-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+  flex-shrink: 0;
+}
+
+.yt-modal__close:hover {
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.yt-modal__close:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ——— Player ——— */
+.yt-modal__player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.yt-modal__player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ——— Fallback link ——— */
+.yt-modal__yt-link {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  letter-spacing: 0.06em;
+  text-align: right;
+  text-decoration: none;
+  transition: color 180ms ease;
+  opacity: 0.6;
+}
+
+.yt-modal__yt-link:hover {
+  color: var(--color-accent);
+  opacity: 1;
+}
